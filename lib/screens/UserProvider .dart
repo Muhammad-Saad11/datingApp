@@ -80,7 +80,7 @@ class User {
     return User(
       name: name,
       age: (json['dob']['age'] as num).toInt(),
-      location: "${json['location']['city']}, ${json['location']['country']}",
+      location: "${json['location']['city']}",
       picture: json['picture']['medium'],
       distance: 3.0, //demo for now
     );

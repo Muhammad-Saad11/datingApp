@@ -126,7 +126,8 @@ class _DateCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 2,
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -135,32 +136,51 @@ class _DateCard extends StatelessWidget {
           children: [
             Row(
               children: [
+                const Icon(Icons.event, color: Color(0xFF6C63FF)),
+                const SizedBox(width: 8),
+                Text(
+                  'Dinner',
+                  style: TextStyle(
+                    color: Colors.grey[800],
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.more_vert),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
                 CircleAvatar(
                   backgroundImage: NetworkImage(user.picture),
                   radius: 24,
                 ),
                 const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${user.name} - ${user.age}',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${user.name} - ${user.age}',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        '${user.distance} km from you',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[600],
-                        ),
+                    ),
+                    Text(
+                      '${user.distance} km from you',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
+                const Spacer(),
                 Row(
                   children: [
                     IconButton(
@@ -177,18 +197,71 @@ class _DateCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 16),
             Row(
               children: [
-                const Icon(Icons.calendar_today, size: 16),
+                const Icon(Icons.calendar_today, size: 18),
                 const SizedBox(width: 8),
-                const Text('22-01-2025'),
-                const SizedBox(width: 16),
+                Text(
+                  'Date',
+                  style: TextStyle(fontSize: 14, color: Colors.black),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(
+                  width: 100,
+                ),
                 const Icon(Icons.location_on, size: 16),
-                const SizedBox(width: 8),
-                Text(user.location),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Location',
+                  style: TextStyle(fontSize: 14, color: Colors.black),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(width: 4),
               ],
             ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          'Sun, Jul 17 2024',
+                          style: TextStyle(fontSize: 14, color: Colors.black),
+                        ),
+                        SizedBox(width: 55),
+                        LayoutBuilder(
+                          builder: (context, constraints) {
+                            return ConstrainedBox(
+                              constraints: BoxConstraints(maxWidth: constraints.maxWidth * 0.8),
+                              child: Text(
+                                user.location,
+                                style: TextStyle(fontSize: 14, color: Colors.black),
+                                maxLines: 15,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            );
+                          },
+                        )                      ],
+                    ),
+                    Text(
+                      '08:00 PM',
+                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    ),
+                  ],
+                ),
+                SizedBox(width: 55),
+              ],
+            )        
           ],
         ),
       ),
